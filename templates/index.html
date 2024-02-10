@@ -118,16 +118,19 @@
         		<div class="projects_fillter">
 					<ul class="filter list">
 						<li class="active" data-filter="*"><a href="#">All Categories</a></li>
+						{% for category in categories %}
 						<li data-filter=".{{ category.name }}"><a href="#">{{ category.name }}</a></li>
+						{% endfor %}
 					</ul>
 				</div>
 				<div class="projects_inner row">
                     {% for portfolio in portfolios %}
-					<div class="col-lg-4 col-sm-6  {{ category }}">
+					<div class="col-lg-4 col-sm-6 brand {{ portfolio.category.name }}">
 						<div class="projects_item">
 							<img class="img-fluid" src="{{ portfolio.image.url }}" alt="">
 							<div class="projects_text">
 								<a href="{{ portfolio.get_absolute_url }}"><h4>{{ portfolio.title }}</h4></a>
+								<p>{{ portfolio.description }}</p>
 							</div>
 						</div>
 					</div>

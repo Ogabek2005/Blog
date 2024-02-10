@@ -11,13 +11,13 @@ def index(request):
     services = Service.objects.all()
     posts = Post.objects.all()
     portfolio = Portfolio.objects.all()
-    categories = Category.objects.first()
+    categories = Category.objects.all()
     context = {"profile":profile,
                "skills":skills,
                "abouts":abouts,
                "services":services,
                "posts":posts,
-               "portfolio":portfolio,
+               "portfolios":portfolio,
                "categories":categories}
     return render(request,"index.html",context)
 

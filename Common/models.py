@@ -19,6 +19,8 @@ class Post(BaseModel):
 
 
 
+
+
 class Profile(BaseModel) :
     image = models.ImageField(upload_to="profile/")
     full_name = models.CharField(max_length=100)
