@@ -28,5 +28,5 @@ urlpatterns = [
     path("blog/", blog , name='blog'),
     path('blog/<int:pk>/',blog_detail , name='blog_detail'),
     path("api/v1/", include("API.urls")),
-    path("api/v2/", include("API.urls")),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
