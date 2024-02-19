@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.serializers import ModelSerializer
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import *
 @api_view(http_method_names=['GET','POST'])
 def get_profile(request):
     if request.method == 'POST':
@@ -36,28 +36,28 @@ class ProfileDate(APIView):
         return Response( status=200)
     
 
-@api_view()
-def get_skill(request):
-    skills = Skill.objects.all()
-    result = []
-    for skill in skills :
-        a ={
-        'title': skill.title,
-        'percentage': skill.percentage
-        }
-        result.append(a)
-    return Response(result)
+# @api_view()
+# def get_skill(request):
+#     skills = Skill.objects.all()
+#     result = []
+#     for skill in skills :
+#         a ={
+#         'title': skill.title,
+#         'percentage': skill.percentage
+#         }
+#         result.append(a)
+#     return Response(result)
 
-class SkillSerializer(ModelSerializer):
-    class Meta:
-        model = Skill
-        fields = ("title", "percentage")
-class SkillData(APIView):
-    permission_classes = [IsAuthenticated]
-    def get(self, request , format=None):
-        skills = Skill.objects.all()
-        serializer = SkillSerializer(instance=skills , many=True)
-        return Response(serializer.data)
+# class SkillSerializer(ModelSerializer):
+#     class Meta:
+#         model = Skill
+#         fields = ("title", "percentage")
+# class SkillData(APIView):
+#     permission_classes = [IsAuthenticated]
+#     def get(self, request , format=None):
+#         skills = Skill.objects.all()
+#         serializer = SkillSerializer(instance=skills , many=True)
+#         return Response(serializer.data)
     
 class AboutData(APIView):
     permission_classes = [IsAuthenticated]
@@ -126,4 +126,19 @@ class PostListAPIiev(ListAPIView):
 
         
 
-    
+    #___________________________-----------------------------------------------------------
+
+from .serializer import SkillSerilizer , AboutSerilizer
+
+
+
+class SkillListAPIiev(ListCreateAPIView):
+    queryset = Skill.objects.all()
+    serializer_class = SkillSerilizer
+
+
+
+class AboutCreateAPIiev(CreateAPIView):
+    queryset = About.objects.all()
+    serializer_class = AboutSerilizer
+
